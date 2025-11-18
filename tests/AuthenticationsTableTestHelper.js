@@ -27,7 +27,7 @@ const AuthenticationsTableTestHelper = {
   },
 
   async createToken(server) {
-    await server.inject({
+    const responseUser = await server.inject({
       method: 'POST',
       url: '/users',
       payload: {
@@ -44,8 +44,9 @@ const AuthenticationsTableTestHelper = {
         password: 'secret',
       }
     })
+    const { data: { addedUser: { id } } } = JSON.parse(responseUser.payload)
     const { data: { accessToken } } = JSON.parse(responseLogin.payload);
-    return accessToken;
+    return { id, accessToken };
   }
 };
 
