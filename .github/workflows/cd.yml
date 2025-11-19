@@ -19,10 +19,6 @@ jobs:
           script: |
             cd ~/forum-api-dicoding-expert
             git pull origin main
-            which node
-            which npm
-            echo $SHELL
-            node -v
             npm install
             npm run migrate up
             pm2 restart forum-api
