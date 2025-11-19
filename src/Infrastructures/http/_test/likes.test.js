@@ -60,10 +60,31 @@ describe('/threads/{threadId}/comments/{commentId}/likes endpoint', () => {
             expect(responseJson.message).toBe('Missing authentication');
         });
 
-        it('should response 404 when comment not found', async () => {
+        it('should response 404 when thread not found', async () => {
             const server = await createServer(container);
 
             const { accessToken } = await AuthenticationsTableTestHelper.createToken(server);
+
+            const response = await server.inject({
+                method: 'PUT',
+                url: '/threads/thread-xxx/comments/comment-123/likes',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+
+            const responseJson = JSON.parse(response.payload);
+
+            expect(response.statusCode).toBe(404);
+            expect(responseJson.status).toBe('fail');
+            expect(responseJson.message).toEqual('Thread Tidak Ditemukan');
+        });
+
+        it('should response 404 when comment not found', async () => {
+            const server = await createServer(container);
+
+            const { accessToken, id } = await AuthenticationsTableTestHelper.createToken(server);
+            await ThreadsTableTestHelper.addThread({ owner: id });
 
             const response = await server.inject({
                 method: 'PUT',
