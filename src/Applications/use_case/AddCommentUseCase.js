@@ -14,7 +14,7 @@ class AddCommentUseCase {
       ...useCasePayload, threadId, owner, date: new Date().toISOString(),
     });
 
-    const addedComment = await this._commentRepository.addComment(comment)
+    const addedComment = await this._commentRepository.addComment(comment);
 
     return new AddedComment(addedComment);
   }

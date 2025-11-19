@@ -7,6 +7,7 @@ describe('a DetailComment entities', () => {
       username: 'furqon',
       date: '2025-10-12T07:22:33.555Z',
       content: 'sebuah comment',
+      likeCount: 0,
       replies: [],
       is_delete: null,
     };
@@ -17,6 +18,7 @@ describe('a DetailComment entities', () => {
     expect(comment.username).toEqual(payload.username);
     expect(comment.date).toEqual(payload.date);
     expect(comment.content).toEqual(payload.content);
+    expect(comment.likeCount).toEqual(payload.likeCount);
     expect(comment.replies).toEqual(payload.replies);
   });
 
@@ -26,6 +28,7 @@ describe('a DetailComment entities', () => {
       username: 'dicoding',
       date: '2025-10-13T07:26:21.338Z',
       content: 'komentar yang dihapus',
+      likeCount: 0,
       replies: [],
       isDelete: '2021-08-08T07:30:00.000Z',
     };
@@ -54,6 +57,7 @@ describe('a DetailComment entities', () => {
       username: true,
       date: {},
       content: [],
+      likeCount: {},
       replies: {},
     };
 

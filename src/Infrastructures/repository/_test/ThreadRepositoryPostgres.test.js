@@ -68,10 +68,10 @@ describe('ThreadRepositoryPostgres', () => {
       await expect(threadRepositoryPostgres.getThreadById('4')).rejects.toThrow(NotFoundError);
     });
     it('should return thread correctly', async () => {
-      await ThreadsTableTestHelper.addThread({})
-      const threadRepository = new ThreadRepositoryPostgres(pool)
+      await ThreadsTableTestHelper.addThread({});
+      const threadRepository = new ThreadRepositoryPostgres(pool);
 
-      const thread = await threadRepository.getThreadById('thread-123')
+      const thread = await threadRepository.getThreadById('thread-123');
 
       expect(thread).toStrictEqual({
         id: 'thread-123',
@@ -80,6 +80,6 @@ describe('ThreadRepositoryPostgres', () => {
         date: '2025-10-12',
         username: 'furqon',
       });
-    })
+    });
   });
 });
