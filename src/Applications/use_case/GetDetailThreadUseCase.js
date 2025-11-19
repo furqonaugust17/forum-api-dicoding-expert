@@ -3,7 +3,9 @@ const DetailReply = require('../../Domains/replies/entities/DetailReply');
 const DetailThread = require('../../Domains/threads/entities/DetailThread');
 
 class GetThreadDetailUseCase {
-  constructor({ threadRepository, commentRepository, replyRepository, likeRepository }) {
+  constructor({
+    threadRepository, commentRepository, replyRepository, likeRepository,
+  }) {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
     this._replyRepository = replyRepository;
@@ -19,8 +21,8 @@ class GetThreadDetailUseCase {
 
     const likeCounts = Object.fromEntries(
       (await Promise.all(
-        commentIds.map((id) => this._likeRepository.getLikeCount(id))
-      )).map((count, index) => [commentIds[index], count])
+        commentIds.map((id) => this._likeRepository.getLikeCount(id)),
+      )).map((count, index) => [commentIds[index], count]),
     );
 
     const repliesGroup = {};

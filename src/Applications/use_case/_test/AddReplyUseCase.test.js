@@ -43,9 +43,9 @@ describe('AddReplyUseCase', () => {
 
     const addedReply = await getReplyUseCase.execute(
       useCasePayload, {
-      threadId: params.threadId,
-      commentId: params.commentId,
-    },
+        threadId: params.threadId,
+        commentId: params.commentId,
+      },
       owner,
     );
 
