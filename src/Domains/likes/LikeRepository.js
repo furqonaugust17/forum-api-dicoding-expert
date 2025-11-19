@@ -1,8 +1,4 @@
 class LikeRepository {
-    async verifyComment(commentId) {
-        throw new Error('LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    }
-
     async checkIsLiked({ commentId, owner }) {
         throw new Error('LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     }

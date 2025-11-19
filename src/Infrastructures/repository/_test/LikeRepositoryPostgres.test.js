@@ -3,7 +3,6 @@ const LikesTableTestHelper = require('../../../../tests/LikesTableTestHelper');
 const CommentsTableTestHelper = require('../../../../tests/CommentTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const LikeRepositoryPostgres = require('../LikeRepositoryPostgres');
-const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 
 describe('LikeRepositoryPostgres', () => {
@@ -17,24 +16,6 @@ describe('LikeRepositoryPostgres', () => {
 
     afterAll(async () => {
         await pool.end();
-    });
-
-    describe('verifyComment', () => {
-        it('should throw error when comment not found', async () => {
-            const likeRepositoryPostgres = new LikeRepositoryPostgres(pool, {});
-
-            await expect(likeRepositoryPostgres.verifyComment('comment-x'))
-                .rejects.toThrow(NotFoundError);
-        });
-
-        it('should not throw when comment exists', async () => {
-            await UsersTableTestHelper.addUser({});
-            await ThreadsTableTestHelper.addThread({});
-            await CommentsTableTestHelper.addComment({});
-
-            const likeRepositoryPostgres = new LikeRepositoryPostgres(pool, {});
-            await expect(likeRepositoryPostgres.verifyComment('comment-123')).resolves.not.toThrow(NotFoundError);
-        });
     });
 
     describe('addLike', () => {

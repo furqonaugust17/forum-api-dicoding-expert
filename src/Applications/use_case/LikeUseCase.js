@@ -1,10 +1,13 @@
 class LikeUseCase {
-    constructor({ likeRepository }) {
+    constructor({ threadRepository, commentRepository, likeRepository }) {
+        this._threadRepository = threadRepository;
+        this._commentRepository = commentRepository;
         this._likeRepository = likeRepository;
     }
 
-    async execute({ commentId, owner }) {
-        await this._likeRepository.verifyComment(commentId);
+    async execute({ threadId, commentId, owner }) {
+        await this._threadRepository.getThreadById(threadId);
+        await this._commentRepository.checkExistComment({ commentId, threadId });
 
         const isLiked = await this._likeRepository.checkIsLiked({ commentId, owner });
 
